@@ -80,6 +80,8 @@ To develop a strategy, I played the game for an hour and just tried to get an id
 2. When you make swaps, try to make swaps that will increase the size of two sets at once.
 3. Add a higher priority to sets with a goal space.
 
+I did not worry about the point values of the sets, I mostly just focused on clearing tiles and staying alive. I figured the larger scoring sets would clear eventually.
+
 Overall, I still think this was a pretty basic solution. I came up with a simple way of doing this, and I was surprised at how well it worked honestly. It worked well enough that I didn't spend a lot of time coming up with elaborate solutions, so I think what I did probably still could have been refined plenty more.
 
 In a nutshell, I tried each, swap, computed a score for each swap, then pick the best score. This was by no means an efficient solution.
@@ -96,7 +98,7 @@ size_t BoardAnalyzer::get_score() const {
 }
 ```
 
-Here's the code for my sb-play file
+Here's the code for my `sb-play` file
 
 ```cpp
 #include <vector>
