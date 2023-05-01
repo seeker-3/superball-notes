@@ -82,7 +82,7 @@ To develop a strategy, I played the game for an hour and just tried to get an id
 
 Overall, I still think this was a pretty basic solution. I came up with a simple way of doing this, and I was surprised at how well it worked honestly. It worked well enough that I didn't spend a lot of time coming up with elaborate solutions, so I think what I did probably still could have been refined plenty more.
 
-In a nutshell, I tried each, swap, computed a score for each swap, then pick the best score.
+In a nutshell, I tried each, swap, computed a score for each swap, then pick the best score. This was by no means an efficient solution.
 
 Here's the code for the scoring function: all I did was square each set, this would catch swaps that increase the size of two sets at once, and it would also prioritize larger sets so the most tiles could be cleared out in a single turn. Then I cubed sets with a goal space in them to give them higher priority.
 
