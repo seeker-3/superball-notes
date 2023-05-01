@@ -40,7 +40,7 @@ struct Superball {
   void play();
 };
 
-// ## Analysis structs
+// ## Analysis structs, these are also what I used in `sb-analyze`
 
 // scrape the information from the disjoint set and store it in a map for easy
 // access and iteration
@@ -95,6 +95,8 @@ size_t BoardAnalyzer::get_score() const {
  return score;
 }
 ```
+
+Here's the code for my sb-play file
 
 ```cpp
 #include <vector>
@@ -174,3 +176,5 @@ void Superball::play() {
   best.swaps.front().SWAP();
 }
 ```
+
+Overall my solution did well on certain ones, I think I had one crazy one that scored like 30,000 or something, but for others, it scored only a few hundred.
