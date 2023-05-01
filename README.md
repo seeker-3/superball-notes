@@ -186,3 +186,10 @@ struct BoardAnalyzer {
   size_t get_score() const;
 };
 ```
+
+## Contact
+
+If you have any questions, feel free to reach out to me at
+
+- Email me: abradl11@vols.utk.edu
+- Or message me on Discord: `abram#1150`
