@@ -1,78 +1,6 @@
 # Superball
 
-These are the interfaces for the classes I used for this solution, I omitted all the constructors except for `BoardAnalyzer` for simplicity. Most of these are probably not important, read through the code below, and come back up here for reference if you need it.
-
-```cpp
-typedef std::unordered_map<char, size_t> ColorValues;
-
-// ## Board structs
-
-struct Space {
-  char character; // this needs to be mutable for swaps
-
-  const size_t row;
-  const size_t column;
-  const size_t index;
-  const bool goal;
-
-  bool is_empty() const;
-};
-
-struct Board {
-  std::vector<Space> spaces;
-
-  size_t empty_spaces = 0;
-
-  const size_t rows;
-  const size_t columns;
-  const size_t size;
-
-  const size_t minimum_score_size;
-  const ColorValues color_values;
-
-  void swap_spaces(Space &space1, Space &space2);
-};
-
-struct Superball {
-  Board board;
-
-  void analyze() const;
-  void play();
-};
-
-// ## Analysis structs, these are also what I used in `sb-analyze`
-
-// scrape the information from the disjoint set and store it in a map for easy
-// access and iteration
-struct Set {
-  const size_t id;
-  const size_t size;
-
-  const bool has_goal_space;
-  const bool scorable;
-  const size_t points;
-
-  struct {
-    const char character;
-    const size_t row;
-    const size_t column;
-  } goal;
-
-  void SCORE() const {
-    printf("SCORE %zu %zu\n", goal.row, goal.column);
-    exit(0);
-  }
-};
-
-struct BoardAnalyzer {
-  std::unordered_map<size_t, Set> sets;
-
-  BoardAnalyzer(const Board &board); // Load in the Superball.board member
-
-  void try_to_score() const;
-  size_t get_score() const;
-};
-```
+## Strategy
 
 To develop a strategy, I played the game for an hour and just tried to get an idea of how it worked. I noticed, since five tiles appeared every turn, you needed to clear as many tiles as possible when scoring a set in order to keep up. Once I got a feel for that, I went off a few basic assumptions:
 
@@ -97,6 +25,8 @@ size_t BoardAnalyzer::get_score() const {
  return score;
 }
 ```
+
+## Implementation
 
 Here's the code for my `sb-play` file
 
@@ -180,3 +110,79 @@ void Superball::play() {
 ```
 
 Overall my solution did well on certain ones, I think I had one crazy one that scored like 30,000 or something, but for others, it scored only a few hundred.
+
+## Reference
+
+These are the interfaces for the classes I used for this solution. Most of these are probably not important but may be useful for context. I omitted all the constructors except for `BoardAnalyzer` for simplicity.
+
+```cpp
+typedef std::unordered_map<char, size_t> ColorValues;
+
+// ## Board structs
+
+struct Space {
+  char character; // this needs to be mutable for swaps
+
+  const size_t row;
+  const size_t column;
+  const size_t index;
+  const bool goal;
+
+  bool is_empty() const;
+};
+
+struct Board {
+  std::vector<Space> spaces;
+
+  size_t empty_spaces = 0;
+
+  const size_t rows;
+  const size_t columns;
+  const size_t size;
+
+  const size_t minimum_score_size;
+  const ColorValues color_values;
+
+  void swap_spaces(Space &space1, Space &space2);
+};
+
+struct Superball {
+  Board board;
+
+  void analyze() const;
+  void play();
+};
+
+// ## Analysis structs, these are also what I used in `sb-analyze`
+
+// scrape the information from the disjoint set and store it in a map for easy
+// access and iteration
+struct Set {
+  const size_t id;
+  const size_t size;
+
+  const bool has_goal_space;
+  const bool scorable;
+  const size_t points;
+
+  struct {
+    const char character;
+    const size_t row;
+    const size_t column;
+  } goal;
+
+  void SCORE() const {
+    printf("SCORE %zu %zu\n", goal.row, goal.column);
+    exit(0);
+  }
+};
+
+struct BoardAnalyzer {
+  std::unordered_map<size_t, Set> sets;
+
+  BoardAnalyzer(const Board &board); // Load in the Superball.board member
+
+  void try_to_score() const;
+  size_t get_score() const;
+};
+```
