@@ -97,7 +97,6 @@ size_t BoardAnalyzer::get_score() const {
 ```
 
 ```cpp
-#include "dependencies.cpp"
 #include <cmath>
 #include <vector>
 
