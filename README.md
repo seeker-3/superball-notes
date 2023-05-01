@@ -97,7 +97,6 @@ size_t BoardAnalyzer::get_score() const {
 ```
 
 ```cpp
-#include <cmath>
 #include <vector>
 
 #define SPACES_FILLED_PER_TURN 5
